@@ -5,7 +5,7 @@
 require __DIR__.'/vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-use Command\StreamTargetCommand;
+use Commands\StreamTargetCommand;
 
 $application = new Application();
 
