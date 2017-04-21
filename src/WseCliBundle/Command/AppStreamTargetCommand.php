@@ -1,14 +1,13 @@
 <?php
-namespace Commands;
+namespace WseCliBundle\Command;
 
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use GuzzleHttp\Psr7\Response;
-use Symfony\Component\Console\Helper\FormatterHelper;
+use WseCliBundle\Model\ApiCall;
 
-class StreamTargetCommand extends ContainerAwareCommand
+class AppStreamTargetCommand extends ContainerAwareCommand
 {
 
     const URI_TEMPLATE = "/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/%s/pushpublish/mapentries/%s/actions/%s";
@@ -17,9 +16,9 @@ class StreamTargetCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this->setName('stream-target');
+        $this->setName('app:stream-target');
         $this->setDescription('Manipulates stream targets');
-        $this->setHelp('stream-target enable|disable application_name target_name');
+        $this->setHelp('app:stream-target enable|disable application_name target_name');
         
         $this->setupArguments();
     }
@@ -35,6 +34,10 @@ class StreamTargetCommand extends ContainerAwareCommand
     {
         $uri = $this->getFormattedUri($input);
         
+        
+        /**
+         * @var ApiCall $apiCall
+         */
         $apiCall = $this->getApiCall($uri);
         
         // Make the call to the API and get JSON response
@@ -62,9 +65,9 @@ class StreamTargetCommand extends ContainerAwareCommand
     {
         /**
          *
-         * @var \APICall $apiCall Use service container to retrieve ApiCall
+         * @var APICall $apiCall Use service container to retrieve ApiCall
          */
-        $apiCall = $this->getContainer()->get('wse.apiCall');
+        $apiCall = $this->getContainer()->get('wse_cli.apiCall');
         
         // TODO: Move this to Interface so it's the only two things that have to be configured for a command
         $apiCall->setMethodType(self::METHOD);
@@ -100,4 +103,3 @@ class StreamTargetCommand extends ContainerAwareCommand
         return $formattedCliOutput;
     }
 }
-

@@ -7,9 +7,3 @@ services:
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
-  wse.apiCallBuilder:
-    class: Services\ApiCallBuilder
-  wse.apiCall:
-    class: ApiCall
-    factory: 'wse.apiCallBuilder:CreateApiCall'
-    arguments: ['%wse.hostname%','%wse.authMethod%','%wse.username%','%wse.password%']
