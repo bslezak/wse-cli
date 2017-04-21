@@ -1,0 +1,3 @@
+wse_cli_homepage:
+    path:     /
+    defaults: { _controller: WseCliBundle:Default:index }

@@ -19,7 +19,7 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     # WSE
-    wse.hostname: hostname
-    wse.authMethod: none
-    wse.username: username
-    wse.password: password
+    wse_cli.hostname: hostname
+    wse_cli.authMethod: none
+    wse_cli.username: username
+    wse_cli.password: password

@@ -1,0 +1,10 @@
+services:
+#    wse_cli.example:
+#        class: WseCliBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+  wse_cli.apiCallBuilder:
+    class: WseCliBundle\DependencyInjection\ApiCallBuilder
+  wse_cli.apiCall:
+    class: WseCliBundle\Model\ApiCall
+    factory: 'wse_cli.apiCallBuilder:CreateApiCall'
+    arguments: ['%wse_cli.hostname%','%wse_cli.authMethod%','%wse_cli.username%','%wse_cli.password%']

@@ -4,7 +4,7 @@
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
-use Commands\StreamTargetCommand;
+use WseCliBundle\Command\AppStreamTargetCommand;
 
 // if you don't want to setup permissions the proper way, just uncomment the following PHP line
 // read http://symfony.com/doc/current/setup.html#checking-symfony-application-configuration-and-setup
@@ -26,5 +26,5 @@ if ($debug) {
 
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
-$application->add(new StreamTargetCommand);
+$application->add(new AppStreamTargetCommand);
 $application->run($input);

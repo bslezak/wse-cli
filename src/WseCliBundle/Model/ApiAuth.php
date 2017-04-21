@@ -1,5 +1,7 @@
 <?php
 
+namespace WseCliBundle\Model;
+
 /**
  * @author bslezak <brian@theslezaks.com>
  *

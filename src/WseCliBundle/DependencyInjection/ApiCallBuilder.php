@@ -1,8 +1,11 @@
 <?php
-namespace Services;
+namespace WseCliBundle\DependencyInjection;
 
 
 use GuzzleHttp\Client;
+use WseCliBundle\Model\ApiAuth;
+use WseCliBundle\Model\ApiCall;
+use WseCliBundle\WseCliBundle;
 
 /**
  * @author bslezak <brian@theslezaks.com>
@@ -16,7 +19,7 @@ class ApiCallBuilder
      * @param string $username
      * @param string $password
      * @param string $authMethod none|digest|basic
-     * @return \APICall
+     * @return ApiCall
      */
     public static function CreateApiCall($hostname, $authMethod = 'none', $username = '', $password = '')
     {
@@ -31,9 +34,9 @@ class ApiCallBuilder
             ]
             );
         
-        $clientAuth = new \ApiAuth($username, $password, $authMethod);
+        $clientAuth = new ApiAuth($username, $password, $authMethod);
         
-        return new \ApiCall($client, $clientAuth);
+        return new ApiCall($client, $clientAuth);
     }
 }
 
