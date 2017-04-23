@@ -3,6 +3,7 @@ namespace WseCliBundle\Model;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Exception\ClientException;
 
 /**
  *
@@ -35,6 +36,27 @@ class ApiCall
      * @var string
      */
     private $methodType;
+    
+    /**
+     * @var mixed
+     */
+    private $postData;
+
+    /**
+     * @return the $postData
+     */
+    public function getPostData()
+    {
+        return [ "body" => $this->postData ];
+    }
+
+    /**
+     * @param mixed $postData
+     */
+    public function setPostData($postData)
+    {
+        $this->postData = $postData;
+    }
 
     public function __construct(Client $client, ApiAuth $clientAuth)
     {
@@ -77,8 +99,21 @@ class ApiCall
     public function execute()
     {
         $auth = $this->clientAuth->GetClientAuth();
+        $body = $this->getPostData();
+        $options = array_merge($auth,$body);
+
+        $response = null;
         
-        $response = $this->client->request($this->methodType, $this->uri, $auth);
+        try
+        {
+            $response = $this->client->request($this->methodType, $this->uri, $options);
+        }
+        catch (ClientException $e)
+        {
+            d($e->getResponse()->getBody()->getContents());
+            throw $e;
+        }
+        
         
         return $response->getBody()->getContents();
     }
