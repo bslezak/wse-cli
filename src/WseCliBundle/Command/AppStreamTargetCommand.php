@@ -20,10 +20,10 @@ class AppStreamTargetCommand extends ContainerAwareCommand
         $this->setDescription('Manipulates stream targets');
         $this->setHelp('app:stream-target enable|disable application_name target_name');
         
-        $this->setupArguments();
+        $this->configureArguments();
     }
 
-    protected function setupArguments()
+    protected function configureArguments()
     {
         $this->addArgument('state-change', InputArgument::REQUIRED, 'enable|disable');
         $this->addArgument('application-name', InputArgument::REQUIRED, 'The WSE application name');

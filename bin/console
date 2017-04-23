@@ -26,5 +26,4 @@ if ($debug) {
 
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
-$application->add(new AppStreamTargetCommand);
 $application->run($input);
