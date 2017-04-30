@@ -1,7 +1,6 @@
 <?php
 namespace WseCliBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -9,22 +8,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 use WseCliBundle\Model\StreamRecorder;
 use WseCliBundle\Model\ApiCall;
 
-class AppStreamRecorderCommand extends ContainerAwareCommand
+class AppStreamRecorderCommand extends WseCommand
 {
-
-    const URI_TEMPLATE = "/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/%s/instances/_definst_/streamrecorders/%s";
-
-    const POST_DATA = '{"instanceName":"","fileVersionDelegateName":"","serverName":"","recorderName":"leawood_sanctuary","currentSize":0,"segmentSchedule":"","startOnKeyFrame":true,"outputPath":"","currentFile":"","saveFieldList":[""],"recordData":false,"applicationName":"","moveFirstVideoFrameToZero":false,"recorderErrorString":"","segmentSize":0,"defaultRecorder":false,"splitOnTcDiscontinuity":false,"version":"","baseFile":"","segmentDuration":0,"recordingStartTime":"","fileTemplate":"","backBufferTime":0,"segmentationType":"","currentDuration":0,"fileFormat":"","recorderState":"","option":""}';
-
-    const METHOD = "POST";
-
-    protected function configure()
+    public function configure()
     {
         $this->setName('app:stream-recorder')
             ->setDescription('Creates a new stream recorder');
         
-        $this->configureArguments();
-        $this->configureOptions();
+        $uri = "/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/%s/instances/_definst_/streamrecorders/%s";
+        $this->setUri($uri);
+        
+        $this->setHttpMethod('POST');
+
     }
 
     protected function configureArguments()
@@ -40,16 +35,12 @@ class AppStreamRecorderCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $recorderName = $input->getArgument('recorder-name');
-        $startOnKeyframe = $input->getOption('startOnKeyFrame');
+    	$this->setInput($input);
         
-        $streamRecorder = new StreamRecorder();
-        $streamRecorder->setRecorderName($recorderName);
-        $streamRecorder->setStartOnKeyFrame($startOnKeyframe);
-        
-        $uri = $this->getFormattedUri($input);
+        $uri = $this->getUri();
         $apiCall = $this->getApiCall($uri);
         
+        $streamRecorder = $this->getStreamRecorder();
         $postData = json_encode($streamRecorder);
         
         $apiCall->setPostData($postData);
@@ -69,19 +60,24 @@ class AppStreamRecorderCommand extends ContainerAwareCommand
         );
 
     }
-
+    
     /**
-     *
-     * @return string Fully formatted uri
+     * Builds and returns a StreamRecorder
+     * @return \WseCliBundle\Model\StreamRecorder
      */
-    protected function getFormattedUri(InputInterface $input)
-    {
-        $applicationName = $input->getArgument('application-name');
-        $recorderName = $input->getArgument('recorder-name');
-        
-        return sprintf(self::URI_TEMPLATE, $applicationName, $recorderName);
+    public function getStreamRecorder() {
+    	
+    	$recorderName = $this->input->getArgument('recorder-name');
+    	$startOnKeyframe = $this->input->getOption('startOnKeyFrame');
+    	
+    	$streamRecorder = new StreamRecorder();
+    	$streamRecorder->setRecorderName($recorderName);
+    	$streamRecorder->setStartOnKeyFrame($startOnKeyframe);
+    	
+    	return $streamRecorder;
     }
 
+    
     /**
      *
      * @param string $uri            

@@ -1,28 +1,40 @@
 <?php
 namespace WseCliBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use WseCliBundle\Model\ApiCall;
 
-class AppStreamTargetCommand extends ContainerAwareCommand
+/**
+ * @author bslezak
+ *
+ */
+class AppStreamTargetCommand extends WseCommand
 {
-
-    const URI_TEMPLATE = "/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/%s/pushpublish/mapentries/%s/actions/%s";
-
-    const METHOD = "PUT";
-
-    protected function configure()
+    /**
+     * {@inheritDoc}
+     * @see \WseCliBundle\Command\WseCommand::configure()
+     */
+    public function configure()
     {
+    	$uri = "/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/%s/pushpublish/mapentries/%s/actions/%s";
+    	$this->setUri($uri);
+    	
+    	$this->setHttpMethod('PUT');
+    	
         $this->setName('app:stream-target');
         $this->setDescription('Manipulates stream targets');
         $this->setHelp('app:stream-target enable|disable application_name target_name');
-        
-        $this->configureArguments();
+		parent::configure();        
     }
 
+    /**
+     *
+     * {@inheritdoc}
+     *
+     * @see \WseCliBundle\Command\WseCommand::configureOptions()
+     */
     protected function configureArguments()
     {
         $this->addArgument('state-change', InputArgument::REQUIRED, 'enable|disable');
@@ -30,38 +42,61 @@ class AppStreamTargetCommand extends ContainerAwareCommand
         $this->addArgument('target-name', InputArgument::REQUIRED, 'The name of the stream target');
     }
 
+    /**
+     *
+     * {@inheritdoc}
+     *
+     * @see \WseCliBundle\Command\WseCommand::configureOptions()
+     */
+    protected function configureOptions() {
+    	// TODO: Auto-generated method stub
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \WseCliBundle\Command\WseCommand::getUri()
+     */
+    function getUri() {
+    	$stateChange = $this->input->getArgument('state-change');
+    	$targetName = $this->input->getArgument('target-name');
+    	$applicationName = $this->input->getArgument('application-name');
+    	
+    	return sprintf($this->getUri(), $applicationName, $targetName, $stateChange);
+    }
+	    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Console\Command\Command::execute()
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $uri = $this->getFormattedUri($input);
-        
-        
+    	$this->setInput($input);
+    	
         /**
+         *
          * @var ApiCall $apiCall
          */
-        $apiCall = $this->getApiCall($uri);
+        $apiCall = $this->getApiCall();
         
         // Make the call to the API and get JSON response
         $json = $apiCall->execute();
         
-        $formattedCliOutput = $this->formatOutput($json);
+        
+        /**
+         *
+         * @var FormatterHelper $formatter Formatter for CLI output
+         */
+        $formatter = $this->getHelper('formatter');
+        $formattedCliOutput = $this->formatOutput($json, $formatter);
         
         $output->writeln($formattedCliOutput);
     }
 
     /**
-     *
-     * @return string Fully formatted uri
+     * Creates an ApiCall
+     * @return \WseCliBundle\Model\ApiCall
      */
-    protected function getFormattedUri(InputInterface $input)
-    {
-        $stateChange = $input->getArgument('state-change');
-        $targetName = $input->getArgument('target-name');
-        $applicationName = $input->getArgument('application-name');
-        
-        return sprintf(self::URI_TEMPLATE, $applicationName, $targetName, $stateChange);
-    }
-
-    protected function getApiCall($uri)
+    protected function getApiCall()
     {
         /**
          *
@@ -69,37 +104,9 @@ class AppStreamTargetCommand extends ContainerAwareCommand
          */
         $apiCall = $this->getContainer()->get('wse_cli.apiCall');
         
-        // TODO: Move this to Interface so it's the only two things that have to be configured for a command
-        $apiCall->setMethodType(self::METHOD);
-        $apiCall->SetUri($uri);
+		$apiCall->setMethodType($this->getHttpMethod());
+        $apiCall->SetUri($this->getUri());
         
         return $apiCall;
-    }
-
-    protected function formatOutput($json)
-    {
-        // Decode JSON
-        $response = json_decode($json, true);
-        $formattedCliOutput = '';
-        
-        /**
-         *
-         * @var FormatterHelper $formatter Formatter for CLI output
-         */
-        $formatter = $this->getHelper('formatter');
-        
-        if ($response['success'] == 'true')
-        {
-            $formattedCliOutput = $formatter->formatBlock([
-                "[OK] $json"
-            ], 'info', true);
-        } else
-        {
-            $formattedCliOutput = $formatter->formatBlock([
-                "[ERROR] $json"
-            ], 'error', true);
-        }
-        
-        return $formattedCliOutput;
     }
 }
