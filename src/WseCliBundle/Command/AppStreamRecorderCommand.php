@@ -40,7 +40,6 @@ class AppStreamRecorderCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $applicationName = $input->getArgument('application-name');
         $recorderName = $input->getArgument('recorder-name');
         $startOnKeyframe = $input->getOption('startOnKeyFrame');
         
@@ -55,7 +54,19 @@ class AppStreamRecorderCommand extends ContainerAwareCommand
         
         $apiCall->setPostData($postData);
         
-        return 0;
+        $json = $apiCall->execute();
+        
+        /**
+         *
+         * @var FormatterHelper $formatter Formatter for CLI output
+         */
+        $formatter = $this->getHelper('formatter');
+        
+        return $formatter->formatBlock(
+            ["[OK] $json"],
+            'info',
+            true
+        );
 
     }
 
