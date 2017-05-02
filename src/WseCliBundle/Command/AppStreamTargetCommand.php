@@ -7,26 +7,30 @@ use Symfony\Component\Console\Output\OutputInterface;
 use WseCliBundle\Model\ApiCall;
 
 /**
+ *
  * @author bslezak
  *
  */
 class AppStreamTargetCommand extends WseCommand
 {
+
     /**
-     * {@inheritDoc}
+     *
+     * {@inheritdoc}
+     *
      * @see \WseCliBundle\Command\WseCommand::configure()
      */
     public function configure()
     {
-    	$uri = "/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/%s/pushpublish/mapentries/%s/actions/%s";
-    	$this->setUri($uri);
-    	
-    	$this->setHttpMethod('PUT');
-    	
+        $uri = "/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/%s/pushpublish/mapentries/%s/actions/%s";
+        $this->setUri($uri);
+
+        $this->setHttpMethod('PUT');
+
         $this->setName('app:stream-target');
         $this->setDescription('Manipulates stream targets');
         $this->setHelp('app:stream-target enable|disable application_name target_name');
-		parent::configure();        
+        parent::configure();
     }
 
     /**
@@ -48,52 +52,58 @@ class AppStreamTargetCommand extends WseCommand
      *
      * @see \WseCliBundle\Command\WseCommand::configureOptions()
      */
-    protected function configureOptions() {
-    	// TODO: Auto-generated method stub
+    protected function configureOptions()
+    {
+        // TODO: Auto-generated method stub
     }
-    
+
     /**
-     * {@inheritDoc}
+     *
+     * {@inheritdoc}
+     *
      * @see \WseCliBundle\Command\WseCommand::getUri()
      */
-    function getUri() {
-    	$stateChange = $this->input->getArgument('state-change');
-    	$targetName = $this->input->getArgument('target-name');
-    	$applicationName = $this->input->getArgument('application-name');
-    	
-    	return sprintf($this->getUri(), $applicationName, $targetName, $stateChange);
+    function getUri()
+    {
+        $stateChange = $this->input->getArgument('state-change');
+        $targetName = $this->input->getArgument('target-name');
+        $applicationName = $this->input->getArgument('application-name');
+
+        return sprintf($this->uri, $applicationName, $targetName, $stateChange);
     }
-	    
+
     /**
-     * {@inheritDoc}
+     *
+     * {@inheritdoc}
+     *
      * @see \Symfony\Component\Console\Command\Command::execute()
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-    	$this->setInput($input);
-    	
+        $this->setInput($input);
+
         /**
          *
          * @var ApiCall $apiCall
          */
         $apiCall = $this->getApiCall();
-        
+
         // Make the call to the API and get JSON response
         $json = $apiCall->execute();
-        
-        
+
         /**
          *
          * @var FormatterHelper $formatter Formatter for CLI output
          */
         $formatter = $this->getHelper('formatter');
         $formattedCliOutput = $this->formatOutput($json, $formatter);
-        
+
         $output->writeln($formattedCliOutput);
     }
 
     /**
      * Creates an ApiCall
+     *
      * @return \WseCliBundle\Model\ApiCall
      */
     protected function getApiCall()
@@ -103,10 +113,10 @@ class AppStreamTargetCommand extends WseCommand
          * @var APICall $apiCall Use service container to retrieve ApiCall
          */
         $apiCall = $this->getContainer()->get('wse_cli.apiCall');
-        
-		$apiCall->setMethodType($this->getHttpMethod());
+
+        $apiCall->setMethodType($this->getHttpMethod());
         $apiCall->SetUri($this->getUri());
-        
+
         return $apiCall;
     }
 }

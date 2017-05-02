@@ -1,18 +1,40 @@
 <?php
 namespace WseCliBundle\Model;
 
+use Symfony\Component\Console\Application;
+use Symfony\Component\Config\FileLocator;
 
 /**
+ *
  * @author bslezak <brian@theslezaks.com>
  *
  */
 class StreamRecorder implements \JsonSerializable
 {
+
     protected $recorderName;
-    protected $startOnKeyFrame; 
+
+    protected $startOnKeyFrame;
+
     protected $recordData;
-    
+
+    protected $loadDefaults;
+
     /**
+     * Contruct a StreamRecorder
+     *
+     * @param bool $loadDefaults
+     *            Optionally load defaults. true|false $loadDefaults = false [Defaults specified in Resources\defaults.yml under "stream-recorder"]
+     */
+    public function __construct($loadDefaults = false)
+    {
+        $this->loadDefaults = $loadDefaults;
+        $this->startOnKeyFrame = true;
+        $this->recordData = false;
+    }
+
+    /**
+     *
      * @return the $name
      */
     public function getRecorderName()
@@ -21,6 +43,7 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
+     *
      * @return the $startOnKeyFrame
      */
     public function getStartOnKeyFrame()
@@ -29,6 +52,7 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
+     *
      * @return the $recordData
      */
     public function getRecordData()
@@ -37,6 +61,7 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
+     *
      * @param string $name
      */
     public function setRecorderName($name)
@@ -45,6 +70,7 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
+     *
      * @param boolean $startOnKeyFrame
      */
     public function setStartOnKeyFrame($startOnKeyFrame)
@@ -53,6 +79,7 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
+     *
      * @param boolean $recordData
      */
     public function setRecordData($recordData)
@@ -60,19 +87,14 @@ class StreamRecorder implements \JsonSerializable
         $this->recordData = $recordData;
     }
 
-    public function __construct()
-    {
-        $this->startOnKeyFrame = true;
-        $this->recordData = false;
-    }
-    
     /**
+     *
      * @return string
      */
     public function jsonSerialize()
     {
         $objArray = get_object_vars($this);
-        
+
         $defaultOptions = [
             "instanceName" => "",
             "fileVersionDelegateName" => "",
@@ -102,8 +124,8 @@ class StreamRecorder implements \JsonSerializable
             "recorderState" => "",
             "option" => ""
         ];
-        
-        return array_merge($objArray,$defaultOptions);
+
+        return array_merge($objArray, $defaultOptions);
     }
 }
 
