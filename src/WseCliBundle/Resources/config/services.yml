@@ -1,3 +1,4 @@
+# All WseCli services defined here
 services:
   wse_cli.apiCallBuilder:
     class: WseCliBundle\DependencyInjection\ApiCallBuilder
