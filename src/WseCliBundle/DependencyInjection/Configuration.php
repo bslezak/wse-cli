@@ -52,7 +52,6 @@ class Configuration implements ConfigurationInterface
             ->defaultValue("")
             ->end()
             ->arrayNode("saveFieldList")
-            ->canBeUnset(true)
             ->children()
             ->end()
             ->end()

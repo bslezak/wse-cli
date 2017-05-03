@@ -28,9 +28,12 @@ class WseCliExtension extends Extension
         $yamlFileLoader->load('config.yml');
 
         $processor = new Processor();
-        $processor->processConfiguration(new Configuration(), $configs);
+        $processedConfig = $processor->processConfiguration(new Configuration(), $configs);
 
-        // TODO: Check whether configuration is actually being processed
-        // TODO: See if it's possible to create a custom loader for stream_recorder
+        // Injecting stream_recorder settings into StreamRecorder service
+        $definition = $container->getDefinition('wse_cli.stream_recorder');
+        $definition->addMethodCall('setDefaults', [
+            $processedConfig['stream_recorder']
+        ]);
     }
 }
