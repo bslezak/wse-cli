@@ -20,6 +20,8 @@ class StreamRecorder implements \JsonSerializable
 
     protected $loadDefaults;
 
+    protected $defaults;
+
     /**
      * Contruct a StreamRecorder
      *
@@ -31,6 +33,24 @@ class StreamRecorder implements \JsonSerializable
         $this->loadDefaults = $loadDefaults;
         $this->startOnKeyFrame = true;
         $this->recordData = false;
+    }
+
+    /**
+     *
+     * @return bool StreamRecorder default settings
+     */
+    public function getDefaults()
+    {
+        return $this->defaults;
+    }
+
+    /**
+     *
+     * @param array $defaults
+     */
+    public function setDefaults(array $defaults)
+    {
+        $this->defaults = $defaults;
     }
 
     /**
@@ -94,36 +114,16 @@ class StreamRecorder implements \JsonSerializable
     public function jsonSerialize()
     {
         $objArray = get_object_vars($this);
+        unset($objArray['defaults']);
+        unset($objArray['loadDefaults']);
 
-        $defaultOptions = [
-            "instanceName" => "",
-            "fileVersionDelegateName" => "",
-            "serverName" => "",
-            "currentSize" => 0,
-            "segmentSchedule" => "",
-            "outputPath" => "",
-            "currentFile" => "",
-            "saveFieldList" => [
-                ""
-            ],
-            "applicationName" => "",
-            "moveFirstVideoFrameToZero" => false,
-            "recorderErrorString" => "",
-            "segmentSize" => 0,
-            "defaultRecorder" => false,
-            "splitOnTcDiscontinuity" => false,
-            "version" => "",
-            "baseFile" => "",
-            "segmentDuration" => 0,
-            "recordingStartTime" => "",
-            "fileTemplate" => "",
-            "backBufferTime" => 0,
-            "segmentationType" => "",
-            "currentDuration" => 0,
-            "fileFormat" => "",
-            "recorderState" => "",
-            "option" => ""
-        ];
+        // Declare defaultOptions array as empty
+        $defaultOptions = [];
+
+        // If we should load defaults, populate $defaultOptions
+        if ($this->loadDefaults) {
+            $defaultOptions = $this->getDefaults();
+        }
 
         return array_merge($objArray, $defaultOptions);
     }

@@ -2,7 +2,12 @@
 services:
   wse_cli.apiCallBuilder:
     class: WseCliBundle\DependencyInjection\ApiCallBuilder
+    
   wse_cli.apiCall:
     class: WseCliBundle\Model\ApiCall
     factory: 'wse_cli.apiCallBuilder:CreateApiCall'
     arguments: ['%wse_cli.hostname%','%wse_cli.authMethod%','%wse_cli.username%','%wse_cli.password%']
+    
+  wse_cli.stream_recorder:
+    class: WseCliBundle\Model\StreamRecorder
+    arguments: [true]

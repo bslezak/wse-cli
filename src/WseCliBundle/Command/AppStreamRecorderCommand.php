@@ -119,7 +119,8 @@ class AppStreamRecorderCommand extends WseCommand
         $recorderName = $this->input->getArgument('recorder-name');
         $startOnKeyframe = $this->input->getOption('startOnKeyFrame');
 
-        $streamRecorder = new StreamRecorder();
+        // Get StreamRecorder Service
+        $streamRecorder = $this->getContainer()->get('wse_cli.stream_recorder');
         $streamRecorder->setRecorderName($recorderName);
         $streamRecorder->setStartOnKeyFrame($startOnKeyframe);
 
