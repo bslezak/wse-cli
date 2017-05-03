@@ -69,36 +69,6 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
     
-
-# WseCli configuration
 wse_cli:
-  stream-recorder:
-    instanceName: ""
-    fileVersionDelegateName: ""
-    serverName: ""
-    recorderName: leawood_sanctuary
-    currentSize: 0
-    segmentSchedule: 
-    startOnKeyFrame: true
-    outputPath: ""
-    currentFile: ""
-    saveFieldList:
-      -
-    recordData: false
-    applicationName: ""
-    moveFirstVideoFrameToZero: false
-    recorderErrorString: ""
-    segmentSize: 0
-    defaultRecorder: false
-    splitOnTcDiscontinuity: false
-    version: ""
-    baseFile: ""
-    segmentDuration: 0
-    recordingStartTime: ""
-    fileTemplate: ""
-    backBufferTime: 0
-    segmentationType: ""
-    currentDuration: 0
-    fileFormat: ""
-    recorderState: ""
-    option: ""    
+  stream_recorder:
+    applicationName: "worship"

@@ -53,9 +53,7 @@ class AppStreamTargetCommand extends WseCommand
      * @see \WseCliBundle\Command\WseCommand::configureOptions()
      */
     protected function configureOptions()
-    {
-        // TODO: Auto-generated method stub
-    }
+    {}
 
     /**
      *
