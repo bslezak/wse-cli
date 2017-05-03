@@ -48,7 +48,9 @@ class AppStreamRecorderCommand extends WseCommand
      */
     protected function configureArguments()
     {
-        $this->addArgument('application-name', InputArgument::REQUIRED, 'The WSE application name')->addArgument('recorder-name', InputArgument::REQUIRED, 'The name of the recorder (must match incoming stream name!)');
+        $this->addArgument('new-state', InputArgument::REQUIRED, 'start|stop Start or stop the recorder');
+        $this->addArgument('application-name', InputArgument::REQUIRED, 'The WSE application name');
+        $this->addArgument('recorder-name', InputArgument::REQUIRED, 'The name of the recorder (must match incoming stream name!)');
     }
 
     /**
@@ -58,7 +60,7 @@ class AppStreamRecorderCommand extends WseCommand
      */
     protected function configureOptions()
     {
-        $this->addOption('startOnKeyFrame', 'sof', InputOption::VALUE_NONE, 'Start the recording on the next key frame');
+        $this->addOption('startOnKeyFrame', 's', InputOption::VALUE_NONE, 'Start the recording on the next key frame');
     }
 
     /**
@@ -93,6 +95,20 @@ class AppStreamRecorderCommand extends WseCommand
         ], 'info', true);
     }
 
+    public function getUri()
+    {
+        $uri = $this->uri;
+        $applicationName = $this->input->getArgument('application-name');
+        $recorderName = $this->input->getArgument('recorder-name');
+        $formattedUri = sprintf($uri, $applicationName, $recorderName);
+
+        if ($this->input->getArgument('new-state') == 'stop') {
+            $formattedUri .= "/actions/stopRecording";
+        }
+
+        return $formattedUri;
+    }
+
     /**
      * Builds and returns a StreamRecorder
      *
@@ -122,8 +138,6 @@ class AppStreamRecorderCommand extends WseCommand
          * @var APICall $apiCall Use service container to retrieve ApiCall
          */
         $apiCall = $this->getContainer()->get('wse_cli.apiCall');
-
-        // TODO: Move this to Interface so it's the only two things that have to be configured for a command
         $apiCall->setMethodType($this->getHttpMethod());
         $apiCall->SetUri($uri);
 
