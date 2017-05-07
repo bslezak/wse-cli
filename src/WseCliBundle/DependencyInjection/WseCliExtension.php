@@ -9,7 +9,10 @@ use Symfony\Component\Config\Definition\Processor;
 
 /**
  *
- * @author bslezak
+ * WseCliExtension
+ *
+ * @author Brian Slezak <brian@theslezaks.com>
+ * @version @application_version@
  *
  */
 class WseCliExtension extends Extension
