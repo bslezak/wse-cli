@@ -9,14 +9,10 @@ use WseCliBundle\Model\StreamRecorder;
 use WseCliBundle\Model\ApiCall;
 
 /**
- * Application Stream Recorder
+ * AppStreamRecorderCommand
  *
- * @category Cli
- * @package WseCliBundle
- * @author bslezak <brian@theslezaks.com>
- * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL3
- * @version GIT: $Id$ In development.
- * @link http://github.com/bslezak
+ * @author Brian Slezak <brian@theslezaks.com>
+ * @version @application_version@
  *
  */
 class AppStreamRecorderCommand extends WseCommand

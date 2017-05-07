@@ -6,7 +6,10 @@ use Symfony\Component\Config\FileLocator;
 
 /**
  *
- * @author bslezak <brian@theslezaks.com>
+ * StreamRecorder
+ *
+ * @author Brian Slezak <brian@theslezaks.com>
+ * @version @application_version@
  *
  */
 class StreamRecorder implements \JsonSerializable
@@ -109,11 +112,13 @@ class StreamRecorder implements \JsonSerializable
 
     /**
      *
-     * @return string
+     * @return array
      */
     public function jsonSerialize()
     {
         $objArray = get_object_vars($this);
+
+        // Unset defaults and loadDefaults as they shouldn't be serialized
         unset($objArray['defaults']);
         unset($objArray['loadDefaults']);
 

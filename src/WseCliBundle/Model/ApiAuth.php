@@ -1,9 +1,12 @@
 <?php
-
 namespace WseCliBundle\Model;
 
 /**
- * @author bslezak <brian@theslezaks.com>
+ *
+ * ApiAuth
+ *
+ * @author Brian Slezak <brian@theslezaks.com>
+ * @version @application_version@
  *
  */
 class ApiAuth
@@ -29,8 +32,8 @@ class ApiAuth
 
     /**
      *
-     * @param string $username            
-     * @param string $password            
+     * @param string $username
+     * @param string $password
      * @param string $authMethod
      *            none|digest|basic
      */
@@ -45,10 +48,9 @@ class ApiAuth
     {
         // Set up clientAuth variable
         $clientAuth = null;
-        
+
         // switch on authMethod
-        switch ($this->authMethod)
-        {
+        switch ($this->authMethod) {
             case 'basic':
                 $clientAuth = [
                     'auth' => [
@@ -57,7 +59,7 @@ class ApiAuth
                     ]
                 ];
                 break;
-            
+
             case 'digest':
                 $clientAuth = [
                     'auth' => [
@@ -67,11 +69,11 @@ class ApiAuth
                     ]
                 ];
                 break;
-            
+
             default:
                 break;
         }
-        
+
         return $clientAuth;
     }
 }

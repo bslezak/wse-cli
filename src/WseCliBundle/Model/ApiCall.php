@@ -7,8 +7,11 @@ use GuzzleHttp\Exception\ClientException;
 
 /**
  *
- * @author bslezak <brian@theslezaks.com>
- *        
+ * ApiCall
+ *
+ * @author Brian Slezak <brian@theslezaks.com>
+ * @version @application_version@
+ *
  */
 class ApiCall
 {
@@ -36,21 +39,26 @@ class ApiCall
      * @var string
      */
     private $methodType;
-    
+
     /**
+     *
      * @var mixed
      */
     private $postData;
 
     /**
+     *
      * @return the $postData
      */
     public function getPostData()
     {
-        return [ "body" => $this->postData ];
+        return [
+            "body" => $this->postData
+        ];
     }
 
     /**
+     *
      * @param mixed $postData
      */
     public function setPostData($postData)
@@ -85,7 +93,7 @@ class ApiCall
 
     /**
      *
-     * @param string $methodType            
+     * @param string $methodType
      */
     public function setMethodType($methodType)
     {
@@ -100,21 +108,19 @@ class ApiCall
     {
         $auth = $this->clientAuth->GetClientAuth();
         $body = $this->getPostData();
-        $options = array_merge($auth,$body);
+        $options = array_merge($auth, $body);
 
         $response = null;
-        
-        try
-        {
+
+        try {
             $response = $this->client->request($this->methodType, $this->uri, $options);
-        }
-        catch (ClientException $e)
-        {
-            d($e->getResponse()->getBody()->getContents());
+        } catch (ClientException $e) {
+            d($e->getResponse()
+                ->getBody()
+                ->getContents());
             throw $e;
         }
-        
-        
+
         return $response->getBody()->getContents();
     }
 }

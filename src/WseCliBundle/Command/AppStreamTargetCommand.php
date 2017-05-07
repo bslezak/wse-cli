@@ -8,7 +8,10 @@ use WseCliBundle\Model\ApiCall;
 
 /**
  *
- * @author bslezak
+ * AppStreamTargetCommand
+ *
+ * @author Brian Slezak <brian@theslezaks.com>
+ * @version @application_version@
  *
  */
 class AppStreamTargetCommand extends WseCommand
