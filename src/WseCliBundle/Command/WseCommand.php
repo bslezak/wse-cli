@@ -10,7 +10,6 @@ use Symfony\Component\Console\Helper\FormatterHelper;
  * WseCommand
  *
  * @author Brian Slezak <brian@theslezaks.com>
- * @version @application_version@
  *
  */
 abstract class WseCommand extends ContainerAwareCommand

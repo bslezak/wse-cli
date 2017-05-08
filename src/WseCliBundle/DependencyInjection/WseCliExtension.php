@@ -12,7 +12,6 @@ use Symfony\Component\Config\Definition\Processor;
  * WseCliExtension
  *
  * @author Brian Slezak <brian@theslezaks.com>
- * @version @application_version@
  *
  */
 class WseCliExtension extends Extension

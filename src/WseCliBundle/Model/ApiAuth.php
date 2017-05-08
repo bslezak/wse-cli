@@ -6,7 +6,6 @@ namespace WseCliBundle\Model;
  * ApiAuth
  *
  * @author Brian Slezak <brian@theslezaks.com>
- * @version @application_version@
  *
  */
 class ApiAuth

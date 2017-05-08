@@ -10,7 +10,6 @@ use GuzzleHttp\Exception\ClientException;
  * ApiCall
  *
  * @author Brian Slezak <brian@theslezaks.com>
- * @version @application_version@
  *
  */
 class ApiCall

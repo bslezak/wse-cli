@@ -12,7 +12,6 @@ use WseCliBundle\Model\ApiCall;
  * AppStreamRecorderCommand
  *
  * @author Brian Slezak <brian@theslezaks.com>
- * @version @application_version@
  *
  */
 class AppStreamRecorderCommand extends WseCommand
