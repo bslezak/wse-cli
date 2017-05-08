@@ -13,7 +13,6 @@ use WseCliBundle\WseCliBundle;
  * A factory for building ApiCall model objects
  *
  * @author Brian Slezak <brian@theslezaks.com>
- * @version @application_version@
  *
  */
 class ApiCallBuilder

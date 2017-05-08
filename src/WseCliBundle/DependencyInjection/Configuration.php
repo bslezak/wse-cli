@@ -9,7 +9,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * Configuration
  *
  * @author Brian Slezak <brian@theslezaks.com>
- * @version @application_version@
  *
  */
 class Configuration implements ConfigurationInterface

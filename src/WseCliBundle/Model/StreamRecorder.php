@@ -9,7 +9,6 @@ use Symfony\Component\Config\FileLocator;
  * StreamRecorder
  *
  * @author Brian Slezak <brian@theslezaks.com>
- * @version @application_version@
  *
  */
 class StreamRecorder implements \JsonSerializable

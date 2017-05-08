@@ -1,21 +1,32 @@
 {
     "chmod": "0755",
     "directories": [
-        "src"
+        "src",
+        "app"
     ],
     "files": [
         "README.md",
-        "LICENSE"
+        "LICENSE",
+        "app/autoload.php"
     ],
     "finder": [
         {
             "name": "*.php",
             "exclude": ["Tests"],
             "in": "vendor"
+        },
+        {
+            "name": "*.xml",
+            "in": "vendor"
+        },
+        {
+            "name": "*.xsd",
+            "exclude": ["Tests"],
+            "in": "vendor"
         }
     ],
     "git-version": "package_version",
     "main": "bin/console",
-    "output": "wsecli.phar",
+    "output": "wse_cli.phar",
     "stub": true
 }
