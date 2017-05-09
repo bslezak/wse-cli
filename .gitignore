@@ -17,3 +17,6 @@
 /test.php
 /docs/*
 /*.phar
+/.php_cs*
+/.buildpath
+/.settings

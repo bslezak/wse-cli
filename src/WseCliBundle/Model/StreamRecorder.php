@@ -1,11 +1,11 @@
 <?php
+/**
+ * @author bslezak <brian@theslezaks.com>
+ *
+ */
 namespace WseCliBundle\Model;
 
-use Symfony\Component\Console\Application;
-use Symfony\Component\Config\FileLocator;
-
 /**
- *
  * StreamRecorder
  *
  * @author Brian Slezak <brian@theslezaks.com>
@@ -13,7 +13,6 @@ use Symfony\Component\Config\FileLocator;
  */
 class StreamRecorder implements \JsonSerializable
 {
-
     protected $recorderName;
 
     protected $startOnKeyFrame;
@@ -28,7 +27,8 @@ class StreamRecorder implements \JsonSerializable
      * Contruct a StreamRecorder
      *
      * @param bool $loadDefaults
-     *            Optionally load defaults. true|false $loadDefaults = false [Defaults specified in Resources\defaults.yml under "stream-recorder"]
+     *            Optionally load defaults. true|false $loadDefaults = false
+     *            [Defaults specified in Resources\defaults.yml under "stream-recorder"]
      */
     public function __construct($loadDefaults = false)
     {
@@ -132,4 +132,3 @@ class StreamRecorder implements \JsonSerializable
         return array_merge($objArray, $defaultOptions);
     }
 }
-

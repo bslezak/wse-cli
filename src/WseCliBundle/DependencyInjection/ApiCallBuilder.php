@@ -44,4 +44,3 @@ class ApiCallBuilder
         return new ApiCall($client, $clientAuth);
     }
 }
-

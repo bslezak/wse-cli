@@ -6,8 +6,7 @@
     ],
     "files": [
         "README.md",
-        "LICENSE",
-        "app/autoload.php"
+        "LICENSE"
     ],
     "finder": [
         {
@@ -27,6 +26,6 @@
     ],
     "git-version": "package_version",
     "main": "bin/console",
-    "output": "wse_cli.phar",
+    "output": "wsecli.phar",
     "stub": true
 }

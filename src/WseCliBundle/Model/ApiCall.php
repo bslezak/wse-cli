@@ -19,31 +19,31 @@ class ApiCall
      *
      * @var Client
      */
-    private $client;
+    protected $client;
 
     /**
      *
      * @var string
      */
-    private $uri;
+    protected $uri;
 
     /**
      *
      * @var APIAuth
      */
-    private $clientAuth;
+    protected $clientAuth;
 
     /**
      *
      * @var string
      */
-    private $methodType;
+    protected $methodType;
 
     /**
      *
      * @var mixed
      */
-    private $postData;
+    protected $postData;
 
     /**
      *
@@ -123,4 +123,3 @@ class ApiCall
         return $response->getBody()->getContents();
     }
 }
-
