@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             'dev',
             'test'
         ], true)) {
-            // $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
