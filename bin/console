@@ -27,7 +27,6 @@ $debug = getenv('SYMFONY_DEBUG') !== '0' && ! $input->hasParameterOption([
 if ($debug) {
     Debug::enable();
 }
-
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
 $application->setName('WseCli');

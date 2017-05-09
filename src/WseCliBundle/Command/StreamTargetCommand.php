@@ -5,15 +5,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use WseCliBundle\Model\ApiCall;
+use WseCliBundle\DependencyInjection\ApiCallBuilder;
 
 /**
  *
- * AppStreamTargetCommand
+ * StreamTargetCommand
  *
  * @author Brian Slezak <brian@theslezaks.com>
  *
  */
-class AppStreamTargetCommand extends WseCommand
+class StreamTargetCommand extends WseCommand
 {
 
     /**
@@ -29,7 +30,7 @@ class AppStreamTargetCommand extends WseCommand
 
         $this->setHttpMethod('PUT');
 
-        $this->setName('app:stream-target');
+        $this->setName('stream-target');
         $this->setDescription('Manipulates stream targets');
         $this->setHelp('app:stream-target enable|disable application_name target_name');
         parent::configure();
@@ -108,6 +109,7 @@ class AppStreamTargetCommand extends WseCommand
      */
     protected function getApiCall()
     {
+
         /**
          *
          * @var APICall $apiCall Use service container to retrieve ApiCall

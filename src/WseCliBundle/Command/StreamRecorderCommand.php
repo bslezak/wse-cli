@@ -9,12 +9,12 @@ use WseCliBundle\Model\StreamRecorder;
 use WseCliBundle\Model\ApiCall;
 
 /**
- * AppStreamRecorderCommand
+ * StreamRecorderCommand
  *
  * @author Brian Slezak <brian@theslezaks.com>
  *
  */
-class AppStreamRecorderCommand extends WseCommand
+class StreamRecorderCommand extends WseCommand
 {
 
     /**
@@ -26,7 +26,7 @@ class AppStreamRecorderCommand extends WseCommand
      */
     public function configure()
     {
-        $this->setName('app:stream-recorder')->setDescription('Creates a new stream recorder');
+        $this->setName('stream-recorder')->setDescription('Creates a new stream recorder');
 
         $uri = '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/%s/instances/_definst_/streamrecorders/%s';
         $this->setUri($uri);
