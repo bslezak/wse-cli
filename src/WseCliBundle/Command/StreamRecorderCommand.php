@@ -26,7 +26,7 @@ class StreamRecorderCommand extends WseCommand
      */
     public function configure()
     {
-        $this->setName('stream-recorder')->setDescription('Creates a new stream recorder');
+        $this->setName('stream:recorder')->setDescription('Creates a new stream recorder');
 
         $uri = '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/%s/instances/_definst_/streamrecorders/%s';
         $this->setUri($uri);

@@ -5,7 +5,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use WseCliBundle\Model\ApiCall;
-use WseCliBundle\DependencyInjection\ApiCallBuilder;
 
 /**
  *
@@ -27,10 +26,10 @@ class StreamTargetCommand extends WseCommand
     {
         $uri = "/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/%s/pushpublish/mapentries/%s/actions/%s";
         $this->setUri($uri);
-
+        
         $this->setHttpMethod('PUT');
-
-        $this->setName('stream-target');
+        
+        $this->setName('stream:target');
         $this->setDescription('Manipulates stream targets');
         $this->setHelp('app:stream-target enable|disable application_name target_name');
         parent::configure();
@@ -56,7 +55,8 @@ class StreamTargetCommand extends WseCommand
      * @see \WseCliBundle\Command\WseCommand::configureOptions()
      */
     protected function configureOptions()
-    {}
+    {
+    }
 
     /**
      *
@@ -64,12 +64,12 @@ class StreamTargetCommand extends WseCommand
      *
      * @see \WseCliBundle\Command\WseCommand::getUri()
      */
-    function getUri()
+    public function getUri()
     {
         $stateChange = $this->input->getArgument('state-change');
         $targetName = $this->input->getArgument('target-name');
         $applicationName = $this->input->getArgument('application-name');
-
+        
         return sprintf($this->uri, $applicationName, $targetName, $stateChange);
     }
 
@@ -82,23 +82,23 @@ class StreamTargetCommand extends WseCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->setInput($input);
-
+        
         /**
          *
          * @var ApiCall $apiCall
          */
         $apiCall = $this->getApiCall();
-
+        
         // Make the call to the API and get JSON response
         $json = $apiCall->execute();
-
+        
         /**
          *
          * @var FormatterHelper $formatter Formatter for CLI output
          */
         $formatter = $this->getHelper('formatter');
         $formattedCliOutput = $this->formatOutput($json, $formatter);
-
+        
         $output->writeln($formattedCliOutput);
     }
 
@@ -109,16 +109,16 @@ class StreamTargetCommand extends WseCommand
      */
     protected function getApiCall()
     {
-
+        
         /**
          *
          * @var APICall $apiCall Use service container to retrieve ApiCall
          */
         $apiCall = $this->getContainer()->get('wse_cli.apiCall');
-
+        
         $apiCall->setMethodType($this->getHttpMethod());
         $apiCall->SetUri($this->getUri());
-
+        
         return $apiCall;
     }
 }
