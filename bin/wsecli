@@ -30,5 +30,5 @@ if ($debug) {
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
 $application->setName('WseCli');
-$application->setVersion('1.0.0-alpha2');
+$application->setVersion('1.0.0-dev-test');
 $application->run($input);
