@@ -18,8 +18,9 @@ This is built upon the [Symfony Framework](https://symfony.com/) [Console compon
 Recommended to use composer and install globally:
 
 ```
-	composer global require bslezak/wse-cli
+	composer global require bslezak/wse-cli:<version>
 ```
+Replace `<version>` above with the appropriate dev / alpha version.
 
 Also make sure you have the global Composer binaries directory in your PATH. This directory is platform-dependent, see Composer documentation for details. Example for some Unix systems:
 

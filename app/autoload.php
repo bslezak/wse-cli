@@ -1,7 +1,11 @@
 <?php
-use Composer\Autoload\ClassLoader;
+$loader = null;
 
-/** @var ClassLoader $loader */
-$loader = require __DIR__ . '/../vendor/autoload.php';
+// Branch between installation by composer vs local package
+if (file_exists($autoLoaderFile = __DIR__ . '/../../autoload.php')) {
+    $loader = require_once $autoLoaderFile;
+} else {
+    $loader = require_once __DIR__ . '/../vendor/autoload.php';
+}
 
 return $loader;

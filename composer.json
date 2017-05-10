@@ -4,6 +4,12 @@
 	"bin" : [
 		"bin/wsecli"
 	],
+	"repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/bslezak/wse-cli"
+        }
+    ],
 	"require" : {
 		"php" : ">=5.5.9",
 		"guzzlehttp/guzzle" : "^6.2.3",
