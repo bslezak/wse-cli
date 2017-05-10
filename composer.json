@@ -41,6 +41,9 @@
 		"psr-4" : {
 			"" : "src/"
 		},
+		"psr-0" : {
+			"Incenteev\\ParameterHandler\\ScriptHandler" : ""
+		},
 		"classmap" : [
 			"app/AppKernel.php"
 		]
