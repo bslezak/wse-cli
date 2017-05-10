@@ -1,22 +1,25 @@
 {
 	"name" : "bslezak/wse-cli",
-	"description": "A CLI for managing Wowza Streaming Engine&trade;",
+	"description" : "A command line tool for managing Wowza Streaming Engine&trade;",
+	"bin" : [
+		"bin/wsecli"
+	],
 	"require" : {
-		"php": ">=5.5.9",
-		"guzzlehttp/guzzle": "^6.2.3",
-		"incenteev/composer-parameter-handler": "^2.0",
-		"sensio/distribution-bundle": "^5.0",
-		"symfony/config": "^3.2",
-		"symfony/console": "^3.2",
-		"symfony/dependency-injection": "^3.2",
-		"symfony/monolog-bundle": "^3.0.2"
+		"php" : ">=5.5.9",
+		"guzzlehttp/guzzle" : "^6.2.3",
+		"incenteev/composer-parameter-handler" : "^2.0",
+		"sensio/distribution-bundle" : "^5.0",
+		"symfony/config" : "^3.2",
+		"symfony/console" : "^3.2",
+		"symfony/dependency-injection" : "^3.2",
+		"symfony/monolog-bundle" : "^3.0.2"
 	},
 	"require-dev" : {
-		"kint-php/kint": "1.1",
-		"phpunit/phpunit": "6.1.0",
-		"sensio/generator-bundle": "^3.0",
-		"symfony/debug": "^3.2",
-		"symfony/phpunit-bridge": "^3.0"
+		"kint-php/kint" : "1.1",
+		"phpunit/phpunit" : "6.1.0",
+		"sensio/generator-bundle" : "^3.0",
+		"symfony/debug" : "^3.2",
+		"symfony/phpunit-bridge" : "^3.0"
 	},
 	"license" : "Apache-2.0",
 	"autoload-dev" : {
@@ -41,14 +44,9 @@
 			"app/AppKernel.php"
 		]
 	},
-	"type" : "symfony-bundle",
+	"type" : "project",
 	"scripts" : {
-		"symfony-scripts" : [
-			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
-		],
+		"symfony-scripts" : "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
 		"post-install-cmd" : "@symfony-scripts",
 		"post-update-cmd" : "@symfony-scripts"
 	},
