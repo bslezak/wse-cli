@@ -51,12 +51,12 @@
 	"type" : "project",
 	"scripts" : {
 		"symfony-scripts" : [
-			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+			"ComposerScript::runScripts"
 		],
 		"post-install-cmd" : "@symfony-scripts",
-		"post-package-install" : "@symfony-scripts",
+		"post-autoload-dump" : "@symfony-scripts",
 		"post-update-cmd" : "@symfony-scripts"
-	},
+	},	
 	"config" : {
 		"sort-packages" : true
 	},
