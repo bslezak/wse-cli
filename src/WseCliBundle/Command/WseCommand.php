@@ -1,4 +1,5 @@
 <?php
+
 namespace WseCliBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -6,35 +7,28 @@ use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 /**
- *
- * WseCommand
+ * WseCommand.
  *
  * @author Brian Slezak <brian@theslezaks.com>
- *
  */
 abstract class WseCommand extends ContainerAwareCommand
 {
-
     /**
-     *
-     * @var string $uri The URI of the WSE API call
+     * @var string The URI of the WSE API call
      */
     protected $uri;
 
     /**
-     *
-     * @var $input InputInterface The InputInterface used with this command
+     * @var InputInterface The InputInterface used with this command
      */
     protected $input;
 
     /**
-     *
-     * @var string $requestMethod The HTTP request method that will be executed
+     * @var string The HTTP request method that will be executed
      */
     protected $httpMethod;
 
     /**
-     *
      * @return string Get the request method
      */
     public function getHttpMethod()
@@ -43,7 +37,6 @@ abstract class WseCommand extends ContainerAwareCommand
     }
 
     /**
-     *
      * {@inheritdoc}
      *
      * @see \Symfony\Component\Console\Command\Command::__construct()
@@ -60,7 +53,7 @@ abstract class WseCommand extends ContainerAwareCommand
     }
 
     /**
-     * You should probably override this fuction if you need to format or manipulate the URI
+     * You should probably override this fuction if you need to format or manipulate the URI.
      *
      * @return string The URI of the WSE API call
      */
@@ -70,7 +63,6 @@ abstract class WseCommand extends ContainerAwareCommand
     }
 
     /**
-     *
      * @param $uri string
      *            The URI of the WSE API call
      */
@@ -81,9 +73,8 @@ abstract class WseCommand extends ContainerAwareCommand
     }
 
     /**
-     *
      * @param string $httpMethod
-     *            The request method that will be executed for this WseCommand
+     *                           The request method that will be executed for this WseCommand
      */
     public function setHttpMethod($httpMethod)
     {
@@ -92,7 +83,6 @@ abstract class WseCommand extends ContainerAwareCommand
     }
 
     /**
-     *
      * @return \Symfony\Component\Console\Input\InputInterface
      */
     protected function getInput()
@@ -101,8 +91,8 @@ abstract class WseCommand extends ContainerAwareCommand
     }
 
     /**
-     *
      * @param InputInterface $input
+     *
      * @return \WseCliBundle\Command\AppStreamTargetCommand
      */
     protected function setInput(InputInterface $input)
@@ -112,10 +102,11 @@ abstract class WseCommand extends ContainerAwareCommand
     }
 
     /**
-     * Formats a JSON response into CLI formatted output
+     * Formats a JSON response into CLI formatted output.
      *
      * @param string $json
-     *            A JSON formatted string
+     *                     A JSON formatted string
+     *
      * @return string CLI formatted output
      */
     protected function formatOutput($json, FormatterHelper $formatter)
@@ -126,11 +117,11 @@ abstract class WseCommand extends ContainerAwareCommand
 
         if ($response['success'] == 'true') {
             $formattedCliOutput = $formatter->formatBlock([
-                "[OK] $json"
+                "[OK] $json",
             ], 'info', true);
         } else {
             $formattedCliOutput = $formatter->formatBlock([
-                "[ERROR] $json"
+                "[ERROR] $json",
             ], 'error', true);
         }
 

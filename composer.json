@@ -23,6 +23,7 @@
 		"symfony/monolog-bundle": "^3.0.2"
 	},
 	"require-dev" : {
+		"composer/composer": "^1.4",
 		"kint-php/kint" : "1.1",
 		"phpunit/phpunit" : "6.1.0",
 		"symfony/debug" : "^3.2",

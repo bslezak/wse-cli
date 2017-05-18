@@ -1,40 +1,34 @@
 <?php
+
 namespace WseCliBundle\Model;
 
 /**
- *
- * ApiAuth
+ * ApiAuth.
  *
  * @author Brian Slezak <brian@theslezaks.com>
- *
  */
 class ApiAuth
 {
-
     /**
-     *
-     * @var string $username
+     * @var string
      */
     private $username;
 
     /**
-     *
-     * @var string $password
+     * @var string
      */
     private $password;
 
     /**
-     *
-     * @var string $authMethod Should be one of none|basic|digest
+     * @var string Should be one of none|basic|digest
      */
     private $authMethod;
 
     /**
-     *
      * @param string $username
      * @param string $password
      * @param string $authMethod
-     *            none|digest|basic
+     *                           none|digest|basic
      */
     public function __construct($username, $password, $authMethod = 'none')
     {
@@ -54,8 +48,8 @@ class ApiAuth
                 $clientAuth = [
                     'auth' => [
                         $this->username,
-                        $this->password
-                    ]
+                        $this->password,
+                    ],
                 ];
                 break;
 
@@ -64,8 +58,8 @@ class ApiAuth
                     'auth' => [
                         $this->username,
                         $this->password,
-                        $this->authMethod
-                    ]
+                        $this->authMethod,
+                    ],
                 ];
                 break;
 

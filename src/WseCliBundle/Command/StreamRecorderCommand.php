@@ -1,4 +1,5 @@
 <?php
+
 namespace WseCliBundle\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
@@ -9,20 +10,16 @@ use WseCliBundle\Model\StreamRecorder;
 use WseCliBundle\Model\ApiCall;
 
 /**
- * StreamRecorderCommand
+ * StreamRecorderCommand.
  *
  * @author Brian Slezak <brian@theslezaks.com>
- *
  */
 class StreamRecorderCommand extends WseCommand
 {
-
     /**
-     *
      * {@inheritdoc}
      *
      * @see \Symfony\Component\Console\Command\Command::configure()
-     * @return void
      */
     public function configure()
     {
@@ -37,9 +34,7 @@ class StreamRecorderCommand extends WseCommand
     }
 
     /**
-     * Configure command arguments
-     *
-     * @return void
+     * Configure command arguments.
      */
     protected function configureArguments()
     {
@@ -49,9 +44,7 @@ class StreamRecorderCommand extends WseCommand
     }
 
     /**
-     * Configure command options
-     *
-     * @return void
+     * Configure command options.
      */
     protected function configureOptions()
     {
@@ -59,10 +52,10 @@ class StreamRecorderCommand extends WseCommand
     }
 
     /**
-     *
      * {@inheritdoc}
      *
      * @see \Symfony\Component\Console\Command\Command::execute()
+     *
      * @return string
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -80,13 +73,12 @@ class StreamRecorderCommand extends WseCommand
         $json = $apiCall->execute();
 
         /**
-         *
-         * @var FormatterHelper $formatter Formatter for CLI output
+         * @var FormatterHelper Formatter for CLI output
          */
         $formatter = $this->getHelper('formatter');
 
         return $formatter->formatBlock([
-            "[OK] $json"
+            "[OK] $json",
         ], 'info', true);
     }
 
@@ -98,14 +90,14 @@ class StreamRecorderCommand extends WseCommand
         $formattedUri = sprintf($uri, $applicationName, $recorderName);
 
         if ($this->input->getArgument('new-state') == 'stop') {
-            $formattedUri .= "/actions/stopRecording";
+            $formattedUri .= '/actions/stopRecording';
         }
 
         return $formattedUri;
     }
 
     /**
-     * Builds and returns a StreamRecorder
+     * Builds and returns a StreamRecorder.
      *
      * @return \WseCliBundle\Model\StreamRecorder
      */
@@ -123,15 +115,14 @@ class StreamRecorderCommand extends WseCommand
     }
 
     /**
-     *
      * @param string $uri
+     *
      * @return ApiCall
      */
     protected function getApiCall($uri)
     {
         /**
-         *
-         * @var APICall $apiCall Use service container to retrieve ApiCall
+         * @var APICall Use service container to retrieve ApiCall
          */
         $apiCall = $this->getContainer()->get('wse_cli.apiCall');
         $apiCall->setMethodType($this->getHttpMethod());

@@ -1,6 +1,7 @@
 <?php
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use WseCliBundle\FirstExecutionTasks;
 
 class AppKernel extends Kernel
 {
@@ -12,7 +13,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new WseCliBundle\WseCliBundle()
         ];
-
+        
         if (in_array($this->getEnvironment(), [
             'dev',
             'test'
@@ -20,7 +21,7 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
-
+        
         return $bundles;
     }
 
@@ -43,6 +44,7 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
+        FirstExecutionTasks::checkFistTimeConfig($this->getRootDir());
         $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
     }
 }

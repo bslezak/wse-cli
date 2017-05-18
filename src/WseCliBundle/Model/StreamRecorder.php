@@ -1,15 +1,14 @@
 <?php
 /**
  * @author bslezak <brian@theslezaks.com>
- *
  */
+
 namespace WseCliBundle\Model;
 
 /**
- * StreamRecorder
+ * StreamRecorder.
  *
  * @author Brian Slezak <brian@theslezaks.com>
- *
  */
 class StreamRecorder implements \JsonSerializable
 {
@@ -24,11 +23,11 @@ class StreamRecorder implements \JsonSerializable
     protected $defaults;
 
     /**
-     * Contruct a StreamRecorder
+     * Contruct a StreamRecorder.
      *
      * @param bool $loadDefaults
-     *            Optionally load defaults. true|false $loadDefaults = false
-     *            [Defaults specified in Resources\defaults.yml under "stream-recorder"]
+     *                           Optionally load defaults. true|false $loadDefaults = false
+     *                           [Defaults specified in Resources\defaults.yml under "stream-recorder"]
      */
     public function __construct($loadDefaults = false)
     {
@@ -38,7 +37,6 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
-     *
      * @return bool StreamRecorder default settings
      */
     public function getDefaults()
@@ -47,7 +45,6 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
-     *
      * @param array $defaults
      */
     public function setDefaults(array $defaults)
@@ -56,7 +53,6 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
-     *
      * @return the $name
      */
     public function getRecorderName()
@@ -65,7 +61,6 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
-     *
      * @return the $startOnKeyFrame
      */
     public function getStartOnKeyFrame()
@@ -74,7 +69,6 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
-     *
      * @return the $recordData
      */
     public function getRecordData()
@@ -83,7 +77,6 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
-     *
      * @param string $name
      */
     public function setRecorderName($name)
@@ -92,8 +85,7 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
-     *
-     * @param boolean $startOnKeyFrame
+     * @param bool $startOnKeyFrame
      */
     public function setStartOnKeyFrame($startOnKeyFrame)
     {
@@ -101,8 +93,7 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
-     *
-     * @param boolean $recordData
+     * @param bool $recordData
      */
     public function setRecordData($recordData)
     {
@@ -110,7 +101,6 @@ class StreamRecorder implements \JsonSerializable
     }
 
     /**
-     *
      * @return array
      */
     public function jsonSerialize()
