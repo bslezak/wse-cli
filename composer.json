@@ -12,6 +12,7 @@
     ],
 	"require" : {
 		"php": ">=5.5.9",
+		"composer/composer": "^1.4",
 		"guzzlehttp/guzzle": "^6.2.3",
 		"incenteev/composer-parameter-handler": "^2.0",
 		"sensio/distribution-bundle": "^5.0",
@@ -23,7 +24,6 @@
 		"symfony/monolog-bundle": "^3.0.2"
 	},
 	"require-dev" : {
-		"composer/composer": "^1.4",
 		"kint-php/kint" : "1.1",
 		"phpunit/phpunit" : "6.1.0",
 		"symfony/debug" : "^3.2",
