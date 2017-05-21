@@ -7,7 +7,7 @@ The wse-cli project is a command line utility to control Wowza Streaming Engine&
 
 Admittedly, this is hackish right now. It may even be broken. I expect you'll look at some pieces of this and think "WTF no", and I also expect and hope that you'll channel that energy to jump in and improve things.
 
-##Starting Point
+## Starting Point
 
 This initial alpha release only includes two commands to manage stream targets and stream recorders. It also makes calls to `_defaultserver_` and `_defaultVHost_` directly, as this is presently hard-coded into strings within the command's URIs. 
 Easy to improve upon later.
@@ -46,7 +46,7 @@ Edit the `app/config/parameters.yml` file and edit the following keys:
 If using an authMethod other than `none` then you must specify values for `username` and `password`.
 
 ## Commands
-####StreamTargetCommand
+#### StreamTargetCommand
 Manipulates stream targets
 
 ```
@@ -58,7 +58,7 @@ Manipulates stream targets
 	  application-name      The WSE application name
 	  target-name           The name of the stream target
 ```
-####StreamRecorderCommand
+#### StreamRecorderCommand
 Creates / destroys stream recorders
 
 ```
